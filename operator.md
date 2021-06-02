@@ -47,6 +47,7 @@ operator는 CR와 상호작용하는 정교한 Reconcil과정을 나타내며 �
 
 
 ![operator-level](./operator-level.PNG)
+<br>
 
 level | 설명
 ---|---
@@ -57,4 +58,4 @@ level | 설명
 5|자동 운영(수평-수직 확장, 이상감지 등)
 
 <br>
-operator-sdk는 HELM, ANSIBLE, GO와 연계하여 k8s의 확장기능을 제공합니다.
+operator-sdk는 HELM, ANSIBLE, GO를 사용하여 k8s의 확장기능을 제공하며 golang을 통해 개발시 

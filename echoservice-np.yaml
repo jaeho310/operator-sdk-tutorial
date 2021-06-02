@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: echoservice-np
+  namespace: jh
+spec:
+  type: NodePort
+  ports:
+    - port: 8375 # 서비스가 생성할 port
+      protocol: TCP # 프로토콜
+      targetPort: 8395 # 컨테이너 포트
+      nodePort: 30012 # 외부에서 접근할 port
+  selector: # 서비스가 접근할 pod의 label조건
+    app: echoservice

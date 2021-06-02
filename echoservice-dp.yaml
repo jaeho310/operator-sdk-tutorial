@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echoservice-dp
+  namespace: jh
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: echoservice
+  template:
+    metadata:
+      labels:
+        app: echoservice
+    spec:
+      containers:
+        - name: echoservice
+          image: repo.iris.tools/test/echoproject:4

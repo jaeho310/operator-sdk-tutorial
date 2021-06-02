@@ -9,7 +9,6 @@ crd와 cr을 만들어 쿠버네티스를 확장하여 etcd에 적재해보고 �
 - [custom resource](custom_resource.md)
 - [operator](operator.md)
 - [operator-sdk](operator-sdk.md)
-- [code review]()
 
 
 ## 참조

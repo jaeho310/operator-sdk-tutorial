@@ -12,9 +12,13 @@
     - 실제 Controller 로직을 수행하는 Reconcile Loop와 Runtime Manager Package로 부터 전달받은 Kubernetes Client를 포함
 
 ## 개발방법 및 예제
-예제는 operator sdk를 통해 crd를 정의하고 커스텀 컨트롤러를 구축하여
+예제는 operator sdk를 통해 crd, cr, cc를 구축하여
 간단한 웹 서비스를 관리하는 예제입니다.
-[echoservice.app.yml]
+
+최종적으로는 다음과 같이 동작하게 할 것입니다.
+<details><summary>deployment, service</summary>
+<p>
+
 ```yml
 apiVersion: apps/v1
 kind: Deployment
@@ -22,23 +26,19 @@ metadata:
   name: echoservice-dp
   namespace: jh
 spec:
-   replicas: 2 
   selector:
     matchLabels:
       app: echoservice
-      tier: app
   template:
     metadata:
       labels:
         app: echoservice
-        tier: app
     spec:
       containers:
         - name: echoservice
           image: repo.iris.tools/test/echoproject:4
 ```
 
-[echoservice.nodeport.yml]
 ```yml
 apiVersion: v1
 kind: Service
@@ -48,14 +48,43 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8375 # 서비스가 생성할 port
-      protocol: TCP # 프로토콜
-      targetPort: 8395 # 컨테이너 포트
-      nodePort: 30012 # 외부에서 접근할 port
-  selector: # 서비스가 접근할 pod의 label조건
+    - port: 8375 
+      protocol: TCP 
+      targetPort: 8395 
+      nodePort: 30012 
+  selector: 
     app: echoservice
-    tier: app
 ```
+
+```bash
+kubectl apply -f echoservice-dp.yaml
+kubectl apply -f echoservice-np.yaml
+# 미니큐브로 클러스터를 구축해놓은 경우 아래의 명령어로 접근이 가능합니다.
+minikube service echoservice-np
+```
+</p>
+</details>
+
+해당 작업을 아래와 같은 cr을 통해 동작하도록 개발하는 예제입니다.
+단 size를 통해 pod의 갯수를 제어 하도록 crd와 컨트롤러를 만들겠습니다.
+
+<details><summary>cr</summary>
+<p>
+
+```yml
+apiVersion: mygroup.example.com/v1
+kind: Hello
+metadata:
+  name: hello-sample
+  namespace: default
+spec:
+  # Add fields here
+  size: 3
+```
+
+</p>
+<details>
+
 - operator-sdk를 install 한다.   
     - https://sdk.operatorframework.io/docs/installation/  
 $ operator-sdk version  
