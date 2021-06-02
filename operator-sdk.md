@@ -14,10 +14,25 @@
 ## 개발방법 및 목표
 
 ### 목표
-operator sdk를 통해 crd, cr, cc를 구축하여
-간단한 웹 서비스를 관리하는 예제입니다.
+operator sdk를 통해 crd, cr, cc를 구축하여 간단한 웹 서비스를 관리하는 예제입니다.
+아래와 같은 cr을 쿠버네티스 api server에 요청하면
+<details><summary>cr</summary>
+<p>
 
-최종적으로는 아래의 deployment와 service를 생성한것처럼 동작하게 할 것입니다.
+```yml
+apiVersion: mygroup.example.com/v1
+kind: Hello
+metadata:
+  name: hello-sample
+  namespace: default
+spec:
+  size: 3 # cr의 size라는 field로 replicaset을 제어하겠습니다.
+```
+
+</p>
+</details>
+
+아래의 deployment와 service를 생성한것처럼 동작할 것입니다.(replicas를 제외한 나머지는 모두 하드코딩)
 <details><summary>deployment, service</summary>
 <p>
 
@@ -28,6 +43,7 @@ metadata:
   name: echoservice-dp
   namespace: jh
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: echoservice
@@ -58,33 +74,9 @@ spec:
     app: echoservice
 ```
 
-```bash
-kubectl apply -f echoservice-dp.yaml
-kubectl apply -f echoservice-np.yaml
-# 미니큐브로 클러스터를 구축해놓은 경우 아래의 명령어로 접근이 가능합니다.
-minikube service echoservice-np
-```
 </p>
 </details>
 
-해당작업을 아래와 같은 cr을 통해 동작하도록 operator를 개발하는 예제입니다.  
-단 cr의 size라는 field를 추가해 pod의 갯수를 제어할 수 있도록 하겠습니다.
-
-<details><summary>cr</summary>
-<p>
-
-```yml
-apiVersion: mygroup.example.com/v1
-kind: Hello
-metadata:
-  name: hello-sample
-  namespace: default
-spec:
-  size: 3
-```
-
-</p>
-</details>
 
 ### 개발방법
 
