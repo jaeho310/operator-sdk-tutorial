@@ -3,7 +3,7 @@
 - api server를 감시하여 선언된 api에 맞게 원하는 상태로 만들어주는 컴포넌트
 
 ## custom controller란
-- 일반적인 svc, deployment 등이 아닌 **custom resource** 를 처리하는 컴포넌트 
+- 일반적인 service, deployment 등이 아닌 **custom resource** 를 처리하는 컴포넌트 
 
 ```
 crd와 cr을 사용하여 만든 커스텀 리소스는 etcd에 올라가는 구조화된 데이터일 뿐입니다.  

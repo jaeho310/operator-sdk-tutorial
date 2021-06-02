@@ -58,10 +58,20 @@ spec:
 ```
 해당 yaml파일을 이용해 crd를 생성, api server에 반영이 됐나 확인합니다.
 ```bash
+# crd 적용
 kubectl apply -f hellocrd.yaml
-kubectl explain hello
-kubectl get crd
-```
 
+# crd 확인
+kubectl get crd
+kubectl explain hello
+
+# cr 생성
+kubectl apply -f hello123.yaml
+
+# 생성된 cr 확인
+kubectl get hello
+```
+hello는 만들어지지만 클러스터에는 큰 변화가 없습니다.<br>
+pod, service, deployment는 controller가 동작하고있지만 hello는 etcd에 저장만 될뿐 아무런 동작을 하지 않는 데이터일 뿐입니다.<br>
 </p>
 </details>
