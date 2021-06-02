@@ -58,4 +58,4 @@ level | 설명
 5|자동 운영(수평-수직 확장, 이상감지 등)
 
 <br>
-operator-sdk는 HELM, ANSIBLE, GO를 사용하여 k8s의 확장기능을 제공하며 golang을 통해 개발시 
+operator-sdk는 HELM, ANSIBLE, GO를 사용하여 k8s의 확장을 편하게 할 수 있도록 도와줍니다.
