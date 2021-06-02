@@ -46,21 +46,14 @@ AA는 Go를 통해 개발하며 바이너리와 이미지를 따로 만들어줘
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  # name : 아래의 spec 필드와 맞아야 한다. spec의 plural와 group를 조합한 값이와야 한다. <plural>.<group>
   name: hellos.extension.example.com
 spec:
-  # REST API 용 그룹 이름: /apis/<group>/<version>
   group: extension.example.com
-  # API 버전
   version: v1
-  # Namespaced/Cluster 범위 표시
   scope: Namespaced
   names:
-    # api URL에서 사용할 복수형 이름 : /apis/<group>/<version>/<plural>
     plural: hellos
-    # CLI에서 사용할 단수형 이름
     singular: hello
-    # kind에 사용할 단수형 단어.
     kind: Hello
 ```
 해당 yaml파일을 이용해 crd를 생성, api server에 반영이 됐나 확인합니다.
