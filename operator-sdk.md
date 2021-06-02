@@ -152,10 +152,26 @@ type HelloSpec struct {
 <p>
 /controllers 아래에 위치한 {kind}_controller.go 파일을 수정해서 Controller의 로직을 직접 구현합니다.
 
+test용 Reconcile 메서드입니다.
+```go
+func (r *HelloReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+	myLogger := r.Log.WithValues("hello", req.NamespacedName)
+
+	myLogger.Info("변경사항이 발생하였습니다.")
+	// your logic here
+
+	return ctrl.Result{}, nil
+}
+```
+
+실제 예제 코드입니다.
+
 ```
 operator-sdk에서 제공되지 않는 변수들에는 모두 접두사로 my를 붙였습니다.
 필요한 패키지는 아래의 사이트에서 검색해서 찾아줍니다.(v1, apps/v1 등 k8s apiVersion에 맞는 패키지를 찾아줍니다.)
+cr의 변경사항은 Reconcile이라는 method에서 시작되므로 해당메서드에서 로직을 구현해줍니다. 
 ```
+
 [golang 패키지 찾기](https://pkg.go.dev/) <br>
 <b>코드의 내용이 긴편이니 적용이후 디버깅하며 확인해보겠습니다.</b>
 
