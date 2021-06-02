@@ -1,6 +1,6 @@
 # operator
 ## controller란
-- api server를 감시하여 선언된 api에 맞게 원하는 상태로 만들어주는 역할
+- api server를 감시하여 선언된 api에 맞게 원하는 상태로 만들어주는 컴포넌트
 
 ## custom controller란
 - 일반적인 svc, deployment 등이 아닌 **custom resource** 를 처리하는 컴포넌트 
@@ -44,6 +44,8 @@ operator는 CR와 상호작용하는 정교한 Reconcil과정을 나타내며 �
 
 ## operator 레벨
 **operatorSDK에서 operator의 레벨을 아래와같이 정의하였습니다.**
+
+
 ![operator-level](./operator-level.PNG)
 
 level | 설명
