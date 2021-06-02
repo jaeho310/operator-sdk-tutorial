@@ -78,8 +78,9 @@ spec:
 
 
 ### 개발방법
-1. operator sdk를 설치합니다.
-<details><summary>operator-sdk install</summary>
+---
+### 1. operator sdk를 설치합니다.
+<details><summary>click</summary>
 <p>
 
 [operator-sdk 설치](https://sdk.operatorframework.io/docs/building-operators/golang/installation/)
@@ -92,8 +93,8 @@ operator-sdk version
 </p>
 </details>
 
-2. operator-sdk init 명령어를 통해 초기화합니다.
-<details><summary>operator-sdk init</summary>
+### 2. operator-sdk init 명령어를 통해 초기화합니다.
+<details><summary>click</summary>
 <p>
 
 ```bash
@@ -103,22 +104,28 @@ operator-sdk init --domain=example.com --repo=github.com/my/tutorial
 </p>
 </details>
 
-3. api와 controller를 생성합니다.
-<details><summary>operator-sdk create api</summary>
+### 3. api와 controller를 생성합니다.
+<details><summary>click</summary>
 <p>
 
 ```bash
 operator-sdk create api --version=v1 --kind=MyProject --group=jhgroup
+
+## 아래와 같은 질문이 올라오면 모두 y 해줍니다.
+Create Resource [y/n]
+y
+Create Controller [y/n]
+y
 ```
 
 </p>
 </details>
 
 
-4. golang을 이용해 crd를 정의합니다.
-<details><summary>crd 정의</summary>
+### 4. golang을 이용해 crd를 정의합니다.
+<details><summary>click</summary>
 <p>
-api/{version} 아래에 위치한 {kind}_types.go 파일을 수정합니다.  
+api/{version} 아래에 위치한 {kind}_types.go 파일을 수정합니다.<br>
 추후 make manifest라는 명령어를 사용하면 해당 go 파일로 정의한 crd의 yaml파일이 생성됩니다.
 
 ```bash
@@ -128,9 +135,9 @@ api/{version} 아래에 위치한 {kind}_types.go 파일을 수정합니다.
 </p>
 </details>
 
-5. golang을 이용해 controller를 커스터마이징합니다.
+### 5. golang을 이용해 controller를 커스터마이징합니다.
 
-<details><summary>custom controller</summary>
+<details><summary>click</summary>
 <p>
 /controllers 아래에 위치한 {kind}_controller.go 파일을 수정해서 Controller의 로직을 직접 구현합니다.
 
@@ -141,9 +148,9 @@ api/{version} 아래에 위치한 {kind}_types.go 파일을 수정합니다.
 </p>
 </details>
 
-6. type파일 상태 업데이트, crd yaml파일 생성, api server에 crd 반영
+### 6. type파일 상태 업데이트, crd yaml파일 생성, api server에 crd 반영
 
-<details><summary>Generate and update CRD manifests</summary>
+<details><summary>click</summary>
 <p>
 
 type파일 상태를 업데이트합니다.
@@ -172,8 +179,8 @@ kubectl explain {kind}
 </p>
 </details>
 
-7. operator 실행(controller 동작)
-<details><summary>run</summary>
+### 7. operator 실행(controller 동작)
+<details><summary>click</summary>
 <p>
 
 
@@ -188,11 +195,11 @@ debugging!!!!!!!!!!!
 </p>
 </details>
 
-8. cr 작성 및 apply
-<details><summary>cr</summary>
+### 8. cr 작성 및 apply
+<details><summary>click</summary>
 <p>
 
-crd/samples 아래에 {group}_{version}_{kind}.yaml 파일에 apiversion이 적용되어있습니다.  
+crd/samples 아래에 {group}_{version}_{kind}.yaml 파일에 apiversion이 적용되어있습니다.<br>
 crd를 참고하여 작성하고 apply하여 쿠버네티스가 원하는대로 동작하는지 확인합니다.
 
 </p>
