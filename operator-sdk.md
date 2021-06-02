@@ -11,11 +11,13 @@
 - SDK Controller Package
     - 실제 Controller 로직을 수행하는 Reconcile Loop와 Runtime Manager Package로 부터 전달받은 Kubernetes Client를 포함
 
-## 개발방법 및 예제
-예제는 operator sdk를 통해 crd, cr, cc를 구축하여
+## 개발방법 및 목표
+
+### 목표
+operator sdk를 통해 crd, cr, cc를 구축하여
 간단한 웹 서비스를 관리하는 예제입니다.
 
-최종적으로는 다음과 같이 동작하게 할 것입니다.
+최종적으로는 아래의 deployment와 service를 생성한것처럼 동작하게 할 것입니다.
 <details><summary>deployment, service</summary>
 <p>
 
@@ -65,8 +67,8 @@ minikube service echoservice-np
 </p>
 </details>
 
-해당 작업을 아래와 같은 cr을 통해 동작하도록 개발하는 예제입니다.
-단 size를 통해 pod의 갯수를 제어 하도록 crd와 컨트롤러를 만들겠습니다.
+해당작업을 아래와 같은 cr을 통해 동작하도록 operator를 개발하는 예제입니다.  
+단 cr의 size라는 field를 추가해 pod의 갯수를 제어할 수 있도록 하겠습니다.
 
 <details><summary>cr</summary>
 <p>
@@ -78,12 +80,13 @@ metadata:
   name: hello-sample
   namespace: default
 spec:
-  # Add fields here
   size: 3
 ```
 
 </p>
-<details>
+</details>
+
+### 개발방법
 
 - operator-sdk를 install 한다.   
     - https://sdk.operatorframework.io/docs/installation/  
