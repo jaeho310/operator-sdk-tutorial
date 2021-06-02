@@ -11,10 +11,9 @@
 - SDK Controller Package
     - 실제 Controller 로직을 수행하는 Reconcile Loop와 Runtime Manager Package로 부터 전달받은 Kubernetes Client를 포함
 
-## 개발방법 및 목표
+## 개발방법 및 예제
 
-### 목표
-operator sdk를 통해 crd, cr, cc를 구축하여 간단한 웹 서비스를 관리하는 예제입니다.
+operator sdk를 통해 crd, cr, cc를 구축하여 간단한 웹 서비스를 관리하는 예제입니다.  
 아래와 같은 cr을 쿠버네티스 api server에 요청하면
 <details><summary>cr</summary>
 <p>
@@ -26,7 +25,7 @@ metadata:
   name: hello-sample
   namespace: default
 spec:
-  size: 3 # cr의 size라는 field로 replicaset을 제어하겠습니다.
+  size: 3 # cr의 size라는 field로 pod의 갯수를 제어하겠습니다.
 ```
 
 </p>
@@ -43,7 +42,7 @@ metadata:
   name: echoservice-dp
   namespace: jh
 spec:
-  replicas: 3
+  replicas: 3 # cr의 size 입니다. 
   selector:
     matchLabels:
       app: echoservice
@@ -79,31 +78,122 @@ spec:
 
 
 ### 개발방법
+1. operator sdk를 설치합니다.
+<details><summary>operator-sdk install</summary>
+<p>
 
-- operator-sdk를 install 한다.   
-    - https://sdk.operatorframework.io/docs/installation/  
-$ operator-sdk version  
-명령어를 입력했을때 version이 정상적으로 출력되면 설치완료 
+[operator-sdk 설치](https://sdk.operatorframework.io/docs/building-operators/golang/installation/)
 
-- operator-sdk를 init한다 
-    - $ operator-sdk init --domain=example.com --repo=github.com/my/tutorial  
+```bash
+# 해당 명령어를 입력했을때 version이 정상적으로 출력되면 설치완료 
+operator-sdk version  
+```
 
-- api와 controller를 생성한다.  
-    - $ operator-sdk create api --version=v1 --kind=MyProject --group=jhgroup  
-- golang을 이용해 crd를 정의해준다.  
-    - api/{version} 아래에 위치한 {kind}_types.go 파일을 수정하여 crd를 정의해준다.
-추후 manifests라는 명령어를 사용하면 해당go파일에 정의된 crd yaml파일이 생성된다. 
-- controller 커스터마이징  
-    - ./controllers 아래에 위치한 {kind}_controller.go 파일을 수정해서 Controller의 로직을 직접 구현한다.  
- custom controller(cc)라고하면 컨트롤루프가 정상적으로 돌수있도록 구현합니다.
-- make generate, make manifests  
-    - make파일을 통해 generate(type파일 상태 업데이트), manifests(crd yaml파일 생성)를 하면 ./config/crd/bases 아래에 crd yaml파일이 생성된다.
-- make install  
-    - 이제 kubectl get crd 를 해보면 {kind}.{group}.{domain} 으로 crd가 올라가있다.
-- make run
-    - 실행한다.
+</p>
+</details>
 
-- cr 작성 및 apply  
-    - 2번 과정 이후에 crd/samples 아래에 {group} _ {version} _ {kind} .yaml 파일이 미리 생성되어있지만
-crd에 맞게 커스터마이징 되지는 않으므로 직접 작성한다.
-crd를 참고하여 작성하고 apply 하며 나의 operator가 잘 동작하나 확인한다.
+2. operator-sdk init 명령어를 통해 초기화합니다.
+<details><summary>operator-sdk init</summary>
+<p>
+
+```bash
+operator-sdk init --domain=example.com --repo=github.com/my/tutorial 
+```
+
+</p>
+</details>
+
+3. api와 controller를 생성합니다.
+<details><summary>operator-sdk create api</summary>
+<p>
+
+```bash
+operator-sdk create api --version=v1 --kind=MyProject --group=jhgroup
+```
+
+</p>
+</details>
+
+
+4. golang을 이용해 crd를 정의합니다.
+<details><summary>crd 정의</summary>
+<p>
+api/{version} 아래에 위치한 {kind}_types.go 파일을 수정합니다.  
+추후 make manifest라는 명령어를 사용하면 해당 go 파일로 정의한 crd의 yaml파일이 생성됩니다.
+
+```bash
+
+```
+
+</p>
+</details>
+
+5. golang을 이용해 controller를 커스터마이징합니다.
+
+<details><summary>custom controller</summary>
+<p>
+/controllers 아래에 위치한 {kind}_controller.go 파일을 수정해서 Controller의 로직을 직접 구현합니다.
+
+```bash
+
+```
+
+</p>
+</details>
+
+6. type파일 상태 업데이트, crd yaml파일 생성, api server에 crd 반영
+
+<details><summary>Generate and update CRD manifests</summary>
+<p>
+
+type파일 상태를 업데이트합니다.
+
+```bash
+make generate
+```
+
+crd yaml파일을 생성합니다.
+config/crd/bases 아래에 crd yaml파일이 생성됩니다.
+```bash
+make manifests
+```
+
+crd 적용
+```bash
+make install
+```
+
+crd 적용 확인 {kind}.{group}.{domain} 으로 crd가 적용되어 있습니다.
+```bash
+kubectl get crd
+kubectl explain {kind}
+```
+
+</p>
+</details>
+
+7. operator 실행(controller 동작)
+<details><summary>run</summary>
+<p>
+
+
+```bash
+make run
+# or
+go run main.go
+# or
+debugging!!!!!!!!!!!
+```
+
+</p>
+</details>
+
+8. cr 작성 및 apply
+<details><summary>cr</summary>
+<p>
+
+crd/samples 아래에 {group}_{version}_{kind}.yaml 파일에 apiversion이 적용되어있습니다.  
+crd를 참고하여 작성하고 apply하여 쿠버네티스가 원하는대로 동작하는지 확인합니다.
+
+</p>
+</details>
