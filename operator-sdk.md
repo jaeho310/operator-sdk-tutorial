@@ -77,8 +77,7 @@ spec:
 </details>
 
 
-### operator-sdk 사용법
----
+## operator-sdk 사용법
 ### 1. operator sdk를 설치합니다.
 <details><summary>click</summary>
 <p>
@@ -86,7 +85,13 @@ spec:
 [operator-sdk 설치](https://sdk.operatorframework.io/docs/building-operators/golang/installation/)
 
 ```bash
-# 해당 명령어를 입력했을때 version이 정상적으로 출력되면 설치완료 
+# git과 1.15이상의 golang이 있다면 편리하게 설치가 가능합니다.
+git clone https://github.com/operator-framework/operator-sdk
+cd operator-sdk
+git checkout master
+make install
+
+# 해당 명령어를 입력했을때 version이 출력되면 설치 완료입니다. 
 operator-sdk version  
 ```
 
