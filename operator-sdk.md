@@ -11,7 +11,7 @@
 - SDK Controller Package
     - 실제 Controller 로직을 수행하는 Reconcile Loop와 Runtime Manager Package로 부터 전달받은 Kubernetes Client를 포함
 
-## 개발방법 및 예제
+## 예제
 
 operator sdk를 통해 crd, cr, cc를 구축하여 간단한 웹 서비스를 관리하는 예제입니다.  
 아래와 같은 cr을 쿠버네티스 api server에 요청하면
@@ -77,7 +77,7 @@ spec:
 </details>
 
 
-### 개발방법
+### operator-sdk 사용법
 ---
 ### 1. operator sdk를 설치합니다.
 <details><summary>click</summary>
