@@ -460,7 +460,7 @@ debugging!!!!!!!!!!!
 <details><summary>click</summary>
 <p>
 
-crd/samples 아래에 {group}_{version}_{kind}.yaml 파일에 apiversion이 적용되어있습니다.<br>
+crd/samples 아래 {group}_{version}_{kind}.yaml 이름으로 cr파일이 있습니다.<br>
 crd를 참고하여 작성하고 apply하여 쿠버네티스가 원하는대로 동작하는지 확인합니다.
 
 </p>
