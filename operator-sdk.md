@@ -114,7 +114,7 @@ operator-sdk init --domain=example.com --repo=github.com/my/tutorial
 <p>
 
 ```bash
-operator-sdk create api --version=v1 --kind=MyProject --group=jhgroup
+operator-sdk create api --version=v1 --kind=Hello --group=mygroup
 
 ## 아래와 같은 질문이 올라오면 모두 y 해줍니다.
 Create Resource [y/n]
@@ -134,7 +134,7 @@ api/{version} 아래에 위치한 {kind}_types.go 파일을 수정해 crd를 만
 추후 make manifest라는 명령어를 사용하면 해당 go 파일로 정의한 crd의 yaml파일이 생성됩니다.<br>
 
 <br>
-Hello cr에서 Size라는 필드를 사용할예정이므로 spec에 Size를 추가합니다. 
+Hello에서 spec에 size라는 필드를 사용할예정이므로 해당 struct에 size를 추가합니다. 
 
 ```go
 type HelloSpec struct {
