@@ -114,7 +114,7 @@ operator-sdk init --domain=example.com --repo=github.com/my/tutorial
 <p>
 
 ```bash
-operator-sdk create api --version=v1 --kind=MyProject --group=jhgroup
+operator-sdk create api --version=v1 --kind=Hello --group=mygroup
 
 ## 아래와 같은 질문이 올라오면 모두 y 해줍니다.
 Create Resource [y/n]
