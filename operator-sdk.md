@@ -85,7 +85,7 @@ spec:
 [operator-sdk 설치 가이드](https://sdk.operatorframework.io/docs/building-operators/golang/installation/)
 
 ```bash
-# git과 1.15이상의 golang이 있다면 편리하게 설치가 가능합니다.
+# git과 golang(1.15v 이상)이 있다면 편리하게 설치가 가능합니다.
 git clone https://github.com/operator-framework/operator-sdk
 cd operator-sdk
 git checkout master
@@ -150,9 +150,16 @@ type HelloSpec struct {
 
 <details><summary>click</summary>
 <p>
-/controllers 아래에 위치한 {kind}_controller.go 파일을 수정해서 Controller의 로직을 직접 구현합니다.
 
-test용 Reconcile 메서드입니다.
+/controllers 아래에 위치한 {kind}_controller.go 파일을 수정해서 Controller의 로직을 직접 구현합니다.<br>
+
+[예제1]
+
+```
+cr의 변경사항은 Reconcile이라는 method에서 시작되므로 해당메서드에서 로직을 구현해줍니다.
+test용 Reconcile 메서드입니다
+```
+
 ```go
 func (r *HelloReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	myLogger := r.Log.WithValues("hello", req.NamespacedName)
@@ -164,16 +171,10 @@ func (r *HelloReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 }
 ```
 
-실제 예제 코드입니다.
-
+[예제2]<br>
 ```
 operator-sdk에서 제공되지 않는 변수들에는 모두 접두사로 my를 붙였습니다.
-필요한 패키지는 아래의 사이트에서 검색해서 찾아줍니다.(v1, apps/v1 등 k8s apiVersion에 맞는 패키지를 찾아줍니다.)
-cr의 변경사항은 Reconcile이라는 method에서 시작되므로 해당메서드에서 로직을 구현해줍니다. 
 ```
-
-[golang 패키지 찾기](https://pkg.go.dev/) <br>
-<b>코드의 내용이 긴편이니 적용이후 디버깅하며 확인해보겠습니다.</b>
 
 ```go
 /*
