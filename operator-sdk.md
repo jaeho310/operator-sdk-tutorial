@@ -157,10 +157,10 @@ type HelloSpec struct {
 
 ```
 cr의 변경사항은 Reconcile이라는 method에서 시작되므로 해당메서드에서 로직을 구현해줍니다.
-test용 Reconcile 메서드입니다
 ```
 
 ```go
+// test용 Reconcile 메서드입니다
 func (r *HelloReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	myLogger := r.Log.WithValues("hello", req.NamespacedName)
 
@@ -472,7 +472,7 @@ make run
 # or
 go run main.go
 # or
-debugging!!!!!!!!!!!
+debug
 ```
 
 </p>
