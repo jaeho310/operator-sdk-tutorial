@@ -82,7 +82,7 @@ spec:
 <details><summary>click</summary>
 <p>
 
-[operator-sdk 설치](https://sdk.operatorframework.io/docs/building-operators/golang/installation/)
+[operator-sdk 설치 가이드](https://sdk.operatorframework.io/docs/building-operators/golang/installation/)
 
 ```bash
 # git과 1.15이상의 golang이 있다면 편리하게 설치가 가능합니다.
