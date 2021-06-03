@@ -17,3 +17,4 @@ crd와 cr을 만들어 etcd에 적재해보고 추가 동작을 위한 custom co
 - [operator-sdk tutorial](https://sdk.operatorframework.io/docs/building-operators/golang/tutorial/)
 - [golang 패키지](https://pkg.go.dev/)
 - aa
+- bb
