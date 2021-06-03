@@ -23,7 +23,7 @@ apiVersion: mygroup.example.com/v1
 kind: Hello
 metadata:
   name: hello-sample
-  namespace: default
+  namespace: jh
 spec:
   size: 3 # cr의 size라는 field로 pod의 갯수를 제어하겠습니다.
 ```

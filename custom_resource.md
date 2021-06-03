@@ -23,7 +23,8 @@ size: 3
 해당 yaml파일을 이용해 kubernetes api server에 요청해봅니다.
 ```bash
 kubectl apply -f hello123.yaml
-# hello라는 Kind의 객체는 쿠버네티스가 뭔지 모르기 때문에 등록이 안됩니다.
+# error: unable to recognize "hello123.yaml": no matches for kind "Hello" in version "crd.example.com/v1"
+# Kind가 hello인 객체는 쿠버네티스가 뭔지 모르는 객체입니다. ->  등록이 안됩니다.
 ```
 
 </p>
@@ -72,6 +73,6 @@ kubectl apply -f hello123.yaml
 kubectl get hello
 ```
 hello는 만들어지지만 클러스터에는 큰 변화가 없습니다.<br>
-pod, service, deployment는 controller가 동작하고있지만 hello는 etcd에 저장만 될뿐 아무런 동작을 하지 않는 데이터일 뿐입니다.<br>
+hello는 etcd에 저장만 될뿐 동작을 하지 않는 데이터일 뿐입니다.<br>
 </p>
 </details>
