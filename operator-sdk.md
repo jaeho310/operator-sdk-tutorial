@@ -465,7 +465,7 @@ kubectl explain {kind}
 ### 7. operator 실행(controller 동작)
 <details><summary>click</summary>
 <p>
-
+직접 go 파일을 실행시킵니다.
 
 ```bash
 make run
@@ -475,6 +475,22 @@ go run main.go
 debug
 ```
 
+docker 이미지를 만들어 k8s에 deployment, service를 만들어 실행합니다. 
+```bash
+# makefile에 있는 docker-build, docker-push, docker deploy를 이용 합니다.
+# 준비되어있는 dockerfile을 이용해 이미지를 만들고 레지스트리에 푸쉬합니다.
+make docker-build IMG=myrepo/test/operator-tutorial:1
+make docker-push IMG=myrepo/test/operator-tutorial:1
+
+# 배포합니다.
+make deploy IMG=IMG=myrepo/test/operator-tutorial:1
+
+# projectname-system 새로운 namespace가 생성됩니다. 
+kubectl get all -n tutorial-system
+
+# 하나의 pod에 두개의 컨테이너가 생성되어있습니다.
+# manager라는 이름의 컨테이너에서 로그를 확인하시면 됩니다.
+```
 </p>
 </details>
 
