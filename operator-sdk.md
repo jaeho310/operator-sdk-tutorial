@@ -491,6 +491,11 @@ kubectl get all -n tutorial-system
 # 하나의 pod에 두개의 컨테이너가 생성되어있습니다.
 # manager라는 이름의 컨테이너에서 로그를 확인하시면 됩니다.
 ```
+```
+makefile을 이용하지 않고 사용하려면 레지스트리에 이미지만 푸쉬한후
+/config/manager , /config/rbac 하위 내용을 참고하여
+serviceaccount, clusterrole, clusterrolebinding, deployment를 직접 만들어저서 사용합니다.
+```
 </p>
 </details>
 
