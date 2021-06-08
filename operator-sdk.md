@@ -682,7 +682,7 @@ spec:
 <p>
 
 config/samples 아래 {group}_{version}_{kind}.yaml 이름으로 cr파일이 있습니다.<br>
-crd를 참고하여 작성하고 apply하여 쿠버네티스가 원하는대로 동작하는지 확인합니다.
+crd를 참고하여 작성하고 apply하여 쿠버네티스가 동작하는지 확인합니다.
 
 </p>
 </details>
