@@ -14,7 +14,7 @@ API를 확장해 사용할 수 있는 인터페이스를 제공하고 있습니�
 <p>
 
 ``` yaml
-apiVersion: "crd.example.com/v1"
+apiVersion: "extension.example.com/v1"
 kind: Hello
 metadata:
   name: hello-sample
