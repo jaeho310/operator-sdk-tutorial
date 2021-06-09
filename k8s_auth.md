@@ -67,7 +67,7 @@ https://<apiserver>/api/v1/pods
 - 반대로 role이나 rolebinding만 사용하면 지정한 namespace에 있는 리소스만 접근 가능
 
 <details><summary>RBAC 구조</summary>
-<img src="./k8s-rbac.PNG" width="50%" height="30%">
+<img src="./k8s-rbac.PNG" width="70%" height="45%">
 </details>
 <details><summary>service account를 생성해 인가 구현</summary>
 <p>
