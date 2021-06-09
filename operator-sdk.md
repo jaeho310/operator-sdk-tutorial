@@ -494,6 +494,8 @@ kubectl get all -n tutorial-system
 makefile을 이용하지 않고 사용하려면 레지스트리에 이미지만 푸쉬한후
 /config/manager , /config/rbac 하위 내용을 참고하여
 serviceaccount, clusterrole, clusterrolebinding, deployment를 직접 만들어저서 사용합니다.
+아래의 내용은 pod에 슈퍼 계정인 cluster-admin 권한을 부여하여 실행시키는 예제입니다.
+(pod만 사용해서 컨테이너를 띄우면 마스터노드 api서버에 접근할 권한이 없어 에러가 발생합니다.)
 ```yml
 apiVersion: v1
 kind: Namespace
@@ -520,106 +522,6 @@ subjects:
 - kind: ServiceAccount
   name: controller-manager
   namespace: operators
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  creationTimestamp: null
-  name: manager-role
-rules:
-- apiGroups:
-  - mygroup.example.com
-  resources:
-  - hellos
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - mygroup.example.com
-  resources:
-  - hellos/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - mygroup.example.com
-  resources:
-  - hellos/status
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
-  - ""
-  resources:
-  - services
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - apps
-  resources:
-  - deployments
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - ""
-  resources:
-  - services
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - coordination.k8s.io
-  resources:
-  - leases
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-- apiGroups:
-  - ""
-  resources:
-  - events
-  verbs:
-  - create
-  - patch
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -671,8 +573,6 @@ spec:
       serviceAccountName: controller-manager
       terminationGracePeriodSeconds: 10
 ---
-
-
 ```
 </p>
 </details>
