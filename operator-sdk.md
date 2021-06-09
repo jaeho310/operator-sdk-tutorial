@@ -465,7 +465,7 @@ kubectl explain {kind}
 ### 7. operator 실행(controller 동작)
 <details><summary>click</summary>
 <p>
-직접 go 파일을 실행시킵니다.
+1. 클러스터에서 직접 go 파일을 실행시킵니다.
 
 ```bash
 make run
@@ -475,7 +475,7 @@ go run main.go
 debug
 ```
 
-docker 이미지를 만들어 k8s에 deployment, service를 만들어 실행합니다. 
+2. makefile을 이용하여 docker 이미지를 만들고 k8s에 deployment, service를 만들어 실행합니다. 
 ```bash
 # makefile에 있는 docker-build, docker-push, docker deploy를 이용 합니다.
 # 준비되어있는 dockerfile을 이용해 이미지를 만들고 레지스트리에 푸쉬합니다.
@@ -491,7 +491,7 @@ kubectl get all -n tutorial-system
 # 하나의 pod에 두개의 컨테이너가 생성되어있습니다.
 # manager라는 이름의 컨테이너에서 로그를 확인하시면 됩니다.
 ```
-makefile을 이용하지 않고 사용하려면 레지스트리에 이미지만 푸쉬한후
+3. makefile을 이용하지 않고 사용하려면 레지스트리에 이미지만 푸쉬한후
 /config/manager , /config/rbac 하위 내용을 참고하여
 serviceaccount, clusterrole, clusterrolebinding, deployment를 직접 만들어저서 사용합니다.
 아래의 내용은 pod에 슈퍼 계정인 cluster-admin 권한을 부여하여 실행시키는 예제입니다.
@@ -582,7 +582,7 @@ spec:
 <p>
 
 config/samples 아래 {group}_{version}_{kind}.yaml 이름으로 cr파일이 있습니다.<br>
-crd를 참고하여 작성하고 apply하여 쿠버네티스가 원하는대로 동작하는지 확인합니다.
+crd를 참고하여 작성하고 apply하여 쿠버네티스가 동작하는지 확인합니다.
 
 </p>
 </details>
