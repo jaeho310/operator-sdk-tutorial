@@ -109,7 +109,7 @@ operator-sdk init --domain=example.com --repo=github.com/my/tutorial
 </p>
 </details>
 
-### 3. api와 controller를 생성합니다.
+### 3. resource를 정의합니다.
 <details><summary>click</summary>
 <p>
 
