@@ -29,19 +29,19 @@ $ kubectl config view | grep server | cut -f 2- -d ":" | tr -d " "
 3. api서버에 http request 보내서 인증 확인
 (1) anonymous
 ```
-GET 메서드로 https://<apiserver>/api에 접근하면 403에러가 발생합니다.
+GET 메서드로 https://<apiserver>/apis에 접근하면 403에러가 발생합니다.
 anonymous 사용자로 인증은 되지만 인가를 해주지 않습니다.
 ```
 
 (2) 401 에러 확인
 ```
 직접 401 인증에러를 확인하려면 http header에 인증되지 않은 토큰을 넣어 확인할 수 있습니다.
-Authorization: Bearer test 를 헤더에 추가하여 https://<apiserver>/api 에 request를 보냅니다.
+Authorization: Bearer test 를 헤더에 추가하여 https://<apiserver>/apis 에 request를 보냅니다.
 ```
 
 (3) 200 ok
 ```
-헤더에 인증된 bearer 토큰을 넣어 https://<apiserver>/api 에 request를 보내면
+헤더에 인증된 bearer 토큰을 넣어 https://<apiserver>/apis 에 request를 보내면
 쿠버네티스 서버의 api 목록을 확인할 수 있습니다.
 ```
 
@@ -86,7 +86,7 @@ kind: ClusterRole
 metadata:
   name: my-cluster-role
 rules:
-- apiGroups: # ""는 k8s.io/api/core를 나타냅니다.
+- apiGroups:
   - "" 
   resources:
   - pods
@@ -118,5 +118,24 @@ https://<apiserver>/api/services
 -> 403 forbidden
 ```
 
+5. pod에 ServiceAccount를 지정하여 container가 api server에 접근하도록 허용
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  serviceAccountName: my-service-account
+  containers:
+  - image: nginx
+    name: mypod
+```
+
+```bash
+kubectl run mypod --image=nginx --restart=Never --serviceaccount=my-service-account -o yaml
+```
+컨테이너에 접근하면 /var/run/secrets/kubernetes.io/serviceaccount 인증서와 토큰이 생성되어있다.
+```
+```
 </p>
 </details>
