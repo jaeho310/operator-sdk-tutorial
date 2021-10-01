@@ -131,4 +131,3 @@ kubectl run mypod --image=nginx --restart=Never --serviceaccount=my-service-acco
 ```
 컨테이너에 접근하면 /var/run/secrets/kubernetes.io/serviceaccount 인증서와 토큰이 생성되어있다.
 ```
-```
