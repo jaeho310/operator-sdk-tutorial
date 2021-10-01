@@ -11,8 +11,7 @@
 api서버의 url과 token을 사용하여 api서버에 접근할 수 있습니다.
 ```
 
-<details><summary>http 요청을 통한 인증 확인</summary>
-<p>
+## http 요청을 통한 인증 확인
 
 1. 토큰확인하기
 ```bash
@@ -51,8 +50,6 @@ Authorization: Bearer test 를 헤더에 추가하여 https://<apiserver>/apis �
 default ServiceAccount에 대한 인가가 되지 않아 오류가 발생하는걸 확인할 수 있습니다.
 https://<apiserver>/api/v1/pods
 ```
-</p>
-</details>
 
 
 ## 3. 쿠버네티스 인가
