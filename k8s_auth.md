@@ -11,7 +11,7 @@
 api서버의 url과 token을 사용하여 api서버에 접근할 수 있습니다.
 ```
 
-## http 요청을 통한 인증 확인
+### http 요청을 통한 인증 확인
 
 1. 토큰확인하기
 ```bash
@@ -63,11 +63,9 @@ https://<apiserver>/api/v1/pods
 - role이나 rolebinding 앞에 cluster가 붙는 경우에는 namespace와 관계없이 resource에 접근 가능
 - 반대로 role이나 rolebinding만 사용하면 지정한 namespace에 있는 리소스만 접근 가능
 
-<details><summary>RBAC 구조</summary>
+### RBAC 구조
 <img src="./k8s-rbac.PNG" width="70%" height="45%">
-</details>
-<details><summary>service account를 생성해 인가 구현</summary>
-<p>
+service account를 생성해 인가 구현
 
 1. ServiceAccount 생성
 ```yml
@@ -134,5 +132,3 @@ kubectl run mypod --image=nginx --restart=Never --serviceaccount=my-service-acco
 컨테이너에 접근하면 /var/run/secrets/kubernetes.io/serviceaccount 인증서와 토큰이 생성되어있다.
 ```
 ```
-</p>
-</details>
